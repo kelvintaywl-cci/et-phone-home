@@ -1,0 +1,33 @@
+version: 2.1
+
+executors:
+  base:
+    docker:
+      - cimg/base:current
+    resource_class: small
+
+# workarounds
+jobs:
+  solution-1:
+    executor: base
+    steps:
+      - checkout
+      - run: |
+          printenv CIRCLE_WORKING_DIRECTORY
+      - run: |
+          source $(eval echo ${CIRCLE_WORKING_DIRECTORY}/test.sh)
+  solution-2:
+    executor: base
+    steps:
+      - checkout
+      - run: |
+          printenv CIRCLE_WORKING_DIRECTORY
+      - run: |
+          source $(pwd)/test.sh
+
+workflows:
+  workaround:
+    job:
+      - solution-1
+      - solution-2
+    
