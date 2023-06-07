@@ -3,7 +3,7 @@ version: 2.1
 executors:
   base:
     docker:
-      - cimg/base:current
+      - image: cimg/base:current
     resource_class: small
 
 # workarounds
@@ -27,7 +27,7 @@ jobs:
 
 workflows:
   workaround:
-    job:
+    jobs:
       - solution-1
       - solution-2
     
